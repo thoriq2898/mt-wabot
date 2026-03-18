@@ -2,9 +2,10 @@
   "name": "mt5-wabot",
   "version": "3.0.0",
   "description": "MT5 WhatsApp Bot Suite - Full FXBook-Style Monitoring",
+  "main": "index.js",
   "scripts": {
     "start:endpoint": "node start-endpoint.js",
-    "start:bot": "node start-bot.js",
+    "start:bot": "node index.js",
     "start:all": "node start-all.js"
   },
   "dependencies": {

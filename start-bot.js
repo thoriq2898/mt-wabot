@@ -1,4 +1,2 @@
-// start-bot.js
-// Gunakan: npm run start:bot  ATAU  node start-bot.js
-const { startBot } = require('./src/wa-bot/bot');
-startBot();
+// start-bot.js — Jalankan WA Bot: node start-bot.js atau npm run start:bot
+require('./index');

@@ -372,15 +372,29 @@ const startBot = async () => {
         }
     });
 
-    sock.ev.on('messages.upsert', async ({ messages }) => {
-        const msg = messages[0];
-        if (!msg?.message || msg.key.fromMe) return;
+    sock.ev.on('messages.upsert', async ({ messages, type }) => {
+        // ⚠️ KRITIS: Hanya proses pesan BARU (notify), bukan history sync
+        if (type !== 'notify') return;
 
-        const jid      = msg.key.remoteJid;
-        const fullText = (msg.message?.conversation || msg.message?.extendedTextMessage?.text || '').trim();
-        const parts    = fullText.split(/\s+/);
-        const cmd      = parts[0].toLowerCase();
-        const args     = parts.slice(1);
+        const msg = messages[0];
+        if (!msg?.message) return;
+        if (msg.key.fromMe) return;             // Abaikan pesan dari bot sendiri
+        if (msg.messageStubType) return;        // Abaikan pesan sistem (add/remove member, dll)
+
+        const jid = msg.key.remoteJid;
+
+        // Ekstrak teks dari berbagai tipe pesan WA
+        const fullText = (
+            msg.message?.conversation ||
+            msg.message?.extendedTextMessage?.text ||
+            msg.message?.imageMessage?.caption ||
+            msg.message?.videoMessage?.caption ||
+            ''
+        ).trim();
+
+        const parts = fullText.split(/\s+/);
+        const cmd   = parts[0].toLowerCase();
+        const args  = parts.slice(1);
 
         if (!cmd.startsWith('/')) return;
 
