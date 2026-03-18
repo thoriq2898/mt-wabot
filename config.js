@@ -14,7 +14,7 @@ module.exports = {
     // === API KEY (KEAMANAN) ===
     // Ganti dengan string acak yang kuat!
     // MT5 EA dan bot harus pakai nilai yang SAMA
-    API_KEY: 'MT5_RAHASIA_GANTI_INI_123',
+    API_KEY: '$2a$12$Axpyj12ftthYV.kXIE1leeVD/GrfYVOkt7OHWSdBfxbsRL/lTO6m.',
 
     // === WHATSAPP ===
     // Kosong = semua nomor boleh pakai bot
